@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentService } from './services/component.service';
-import { DragAndDropService } from './services/drag-and-drop.service';
 
 @NgModule({
   imports: [
@@ -9,8 +8,13 @@ import { DragAndDropService } from './services/drag-and-drop.service';
   ],
   declarations: [],
   exports: [
-    ComponentService,
-    DragAndDropService
   ]
 })
-export class TdmCommonModule { }
+export class TdmCommonModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: TdmCommonModule,
+      providers: [ ComponentService ]
+    };
+  }  
+}

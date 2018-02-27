@@ -9,13 +9,18 @@ export class ComponentService {
   private _components: BehaviorSubject<CocktailComponent[]> = new BehaviorSubject([]);
   public readonly components: Observable<CocktailComponent[]> = this._components.asObservable();
 
-  public sourceUrl?: string;
+  private sourceUrl?: string;
 
   constructor(
     private http: HttpClient,
     @Inject('componentSourceUrl') @Optional() public componentSourceUrl?: string) {
       this.sourceUrl = componentSourceUrl
       this.updateComponents();
+  }
+
+  setComponentSourceUrl(url: string) {
+    this.sourceUrl = url;
+    this.updateComponents();
   }
 
   setComponents(components: CocktailComponent[]) {
