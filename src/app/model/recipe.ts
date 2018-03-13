@@ -5,7 +5,7 @@ export class Recipe {
     title: string;
     description: string;
     licenseFee: number;
-    program: string;
+    program: {};
     backgroundColor: string;
     components: CocktailComponent[];
 
