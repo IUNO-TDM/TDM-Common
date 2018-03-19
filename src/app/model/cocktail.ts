@@ -43,7 +43,7 @@ export class Cocktail {
         // total fragments
         var fragmentsCount = this.getFragmentsCount()
     
-        this.layers.forEach(layer => {
+        this.layers.reverse().forEach(layer => {
             var programComponents: any[] = []
             layer.components.forEach(component => {
                 var addNewComponent = true;
