@@ -9,19 +9,20 @@ import { ComponentService, CocktailComponent } from '../public_api';
 })
 export class AppComponent {
   title = 'app';
-  components: CocktailComponent[] = []
+  availableComponents: CocktailComponent[] = []
   recommendedComponents: CocktailComponent[] = []
+  installedComponents: CocktailComponent[] = []
   constructor(componentService: ComponentService) {
-    componentService.components.subscribe(components => {
-      this.components = components;
+    componentService.availableComponents.subscribe(components => {
+      this.availableComponents = components;
     })
     componentService.recommendedComponents.subscribe(components => {
       this.recommendedComponents = components;
     })
+    componentService.installedComponents.subscribe(components => {
+      this.installedComponents = components;
+    })
 
-    componentService.setRecommendComponentIds([
-      "1", "4", "7"
-    ])
     componentService.setComponents([
       new CocktailComponent("1", "Apfelsaft", "#7d7"),
       new CocktailComponent("2", "Bananensaft", "#dd7"),
@@ -32,6 +33,15 @@ export class AppComponent {
       new CocktailComponent("7", "Reserved 2", "#ddf"),
       new CocktailComponent("8", "Reserved 3", "#ddf"),
   ])
+
+  componentService.setRecommendComponentIds([
+      "1", "4", "7"
+    ])
+
+    componentService.setInstalledComponentIds([
+      "7", "2", "8"
+    ])
+
 
   }
 }

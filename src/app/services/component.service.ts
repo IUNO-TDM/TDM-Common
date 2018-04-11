@@ -6,14 +6,18 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ComponentService {
-  private _components: BehaviorSubject<CocktailComponent[]> = new BehaviorSubject([])
-  public readonly components: Observable<CocktailComponent[]> = this._components.asObservable()
+  private _availableComponents: BehaviorSubject<CocktailComponent[]> = new BehaviorSubject([])
+  public readonly availableComponents: Observable<CocktailComponent[]> = this._availableComponents.asObservable()
 
   private _recommendedComponents: BehaviorSubject<CocktailComponent[]> = new BehaviorSubject([])
   public readonly recommendedComponents: Observable<CocktailComponent[]> = this._recommendedComponents.asObservable()
 
+  private _installedComponents: BehaviorSubject<CocktailComponent[]> = new BehaviorSubject([])
+  public readonly installedComponents: Observable<CocktailComponent[]> = this._installedComponents.asObservable()
+
   private sourceUrl?: string
   private recommendedComponentIds: string[] = []
+  private installedComponentIds: string[] = []
 
   constructor(
     private http: HttpClient,
@@ -28,7 +32,7 @@ export class ComponentService {
   }
 
   setComponents(components: CocktailComponent[]) {
-    this._components.next(components)
+    this._availableComponents.next(components)
     this.updateRecommendedComponents()
   }
 
@@ -37,26 +41,48 @@ export class ComponentService {
     this.updateRecommendedComponents()
   }
 
+  setInstalledComponentIds(componentIds: string[]) {
+    this.installedComponentIds = componentIds
+    this.updateInstalledComponents()
+  }
+
   updateComponents() {
     // console.log("Update components, srcUrl = "+this.sourceUrl)
     if (this.sourceUrl != null) {
       // console.log("Starting http request")
       this.http.get<CocktailComponent[]>(this.sourceUrl).subscribe(components => {
-        // console.log("http request done")
-        this._components.next(components)
+        if (components["available"] != null) {
+          var available = components["available"];
+          var installed = components["installed"];
+          var recommended = components["recommended"];
+          this._availableComponents.next(available)
+          this.setRecommendComponentIds(recommended)
+          this.setInstalledComponentIds(installed)
+        } else {
+          // console.log("http request done")
+          this._availableComponents.next(components)
+        }
         this.updateRecommendedComponents()
-        });
+      });
     }
   }
 
   private updateRecommendedComponents() {
-    var recommended: CocktailComponent[] = []
-    this._components.value.forEach(component => {
-      if (this.recommendedComponentIds.indexOf(component.id) > -1) {
-        recommended.push(component)
-      }
+    var recommended = this.recommendedComponentIds.map(id => {
+      return this._availableComponents.value.find(component => {
+        return component.id === id
+      })
     })
     this._recommendedComponents.next(recommended)
+  }
+
+  private updateInstalledComponents() {
+    var installed = this.installedComponentIds.map(id => {
+      return this._availableComponents.value.find(component => {
+        return component.id === id
+      })
+    })
+    this._installedComponents.next(installed)
   }
 
 }

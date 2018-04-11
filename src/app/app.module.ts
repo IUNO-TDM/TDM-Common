@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     HttpClientModule
   ],
+//  providers: [ComponentService, {provide: 'componentSourceUrl', useValue: 'http://localhost:3000/api/components'}],
   providers: [ComponentService],
   bootstrap: [AppComponent]
 })

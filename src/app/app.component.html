@@ -1,10 +1,17 @@
 
 Recommended Components:
-<div *ngFor="let component of recommendedComponents">
-    {{component.name}}
-  </div>
+<ol>
+<li *ngFor="let component of recommendedComponents">{{component.name}}</li>
+</ol>
+  <hr>
+Installed Components:
+<ol>
+  <li *ngFor="let component of installedComponents">{{component.name}}</li>
+  </ol>
+  <hr>
   
 All Components:
-<div *ngFor="let component of components">
-  {{component.name}}
-</div>
+<ol>
+  <li *ngFor="let component of availableComponents">{{component.name}}</li>
+  </ol>
+      
