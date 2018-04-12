@@ -8,6 +8,7 @@ export class Recipe {
     program: {};
     backgroundColor: string;
     components: CocktailComponent[];
+    imageRef: string;
 
     constructor() {
     }
