@@ -42,7 +42,7 @@ export class Cocktail {
         var lines: any[] = []
         // total fragments
         var fragmentsCount = this.getFragmentsCount()
-    
+
         this.layers.reverse().forEach(layer => {
             var programComponents: any[] = []
             layer.components.forEach(component => {
@@ -60,13 +60,19 @@ export class Cocktail {
                         "amount": this.amount / fragmentsCount
                     });
                 }
-                });
-                lines.push({
-                    "components": programComponents,
-                    "timing": 2,
-                    "sleep": 0
-                });
-            }
+            });
+
+            // Round all component amount to integers
+            programComponents.forEach(pc => {
+                pc["amount"] = Math.round(pc["amount"])
+            });
+            
+            lines.push({
+                "components": programComponents,
+                "timing": 2,
+                "sleep": 0
+            });
+        }
         )
         var program = {
             "recipe": {
