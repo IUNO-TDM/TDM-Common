@@ -47,9 +47,7 @@ export class ComponentService {
   }
 
   updateComponents() {
-    // console.log("Update components, srcUrl = "+this.sourceUrl)
     if (this.sourceUrl != null) {
-      // console.log("Starting http request")
       this.http.get<CocktailComponent[]>(this.sourceUrl).subscribe(components => {
         if (components["available"] != null) {
           var available = components["available"];
@@ -59,7 +57,6 @@ export class ComponentService {
           this.setRecommendComponentIds(recommended)
           this.setInstalledComponentIds(installed)
         } else {
-          // console.log("http request done")
           this._availableComponents.next(components)
         }
         this.updateRecommendedComponents()
@@ -68,20 +65,26 @@ export class ComponentService {
   }
 
   private updateRecommendedComponents() {
-    var recommended = this.recommendedComponentIds.map(id => {
-      return this._availableComponents.value.find(component => {
-        return component.id === id
+    var recommended = []
+    if (this.recommendedComponentIds) {
+      recommended = this.recommendedComponentIds.map(id => {
+        return this._availableComponents.value.find(component => {
+          return component.id === id
+        })
       })
-    })
+    }
     this._recommendedComponents.next(recommended)
   }
 
   private updateInstalledComponents() {
-    var installed = this.installedComponentIds.map(id => {
-      return this._availableComponents.value.find(component => {
-        return component.id === id
+    var installed = []
+    if (this.installedComponentIds) {
+      this.installedComponentIds.map(id => {
+        return this._availableComponents.value.find(component => {
+          return component.id === id
+        })
       })
-    })
+    }
     this._installedComponents.next(installed)
   }
 
