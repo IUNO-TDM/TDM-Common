@@ -62,11 +62,11 @@ export class Cocktail {
                 }
             });
 
-            // Round all component amount to integers
+            // Round amounts to integers
             programComponents.forEach(pc => {
                 pc["amount"] = Math.round(pc["amount"])
             });
-            
+
             lines.push({
                 "components": programComponents,
                 "timing": 2,
