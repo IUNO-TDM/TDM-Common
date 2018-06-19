@@ -1,4 +1,4 @@
-import { Injectable, Inject, Optional, LOCALE_ID } from '@angular/core';
+import { Injectable, Inject, Optional} from '@angular/core';
 import { CocktailComponent } from '../model/cocktail';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
@@ -18,13 +18,10 @@ export class ComponentService {
   private sourceUrl?: string
   private recommendedComponentIds: string[] = []
   private installedComponentIds: string[] = []
-  private locale = "en"
-
+  
   constructor(
     private http: HttpClient,
-    @Inject(LOCALE_ID) locale: string,
     @Inject('componentSourceUrl') @Optional() public componentSourceUrl?: string) {
-      this.locale = locale
       this.sourceUrl = componentSourceUrl
       this.updateComponents()
   }
@@ -51,11 +48,7 @@ export class ComponentService {
 
   updateComponents() {
     if (this.sourceUrl != null) {
-      this.http.get<CocktailComponent[]>(this.sourceUrl, {
-        params: {
-          'lang': this.locale
-        }
-      }).subscribe(components => {
+      this.http.get<CocktailComponent[]>(this.sourceUrl).subscribe(components => {
         if (components["available"] != null) {
           var available = components["available"];
           var installed = components["installed"];
