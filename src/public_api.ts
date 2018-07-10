@@ -7,7 +7,6 @@ export { TdmCocktailComponent } from './app/model/cocktail/TdmCocktailComponent'
 export { TdmCocktailComponentService } from './app/services/TdmCocktailComponent.service'
 
 export { TdmObjectPrinterObject } from './app/model/objectprinter/TdmObjectPrinterObject'
-export { TdmObjectPrinterObjectComponent } from './app/model/objectprinter/TdmObjectPrinterObjectComponent'
 
 export { TdmAttribute } from './app/model/TdmAttribute'
 export { TdmComponent } from './app/model/TdmComponent'

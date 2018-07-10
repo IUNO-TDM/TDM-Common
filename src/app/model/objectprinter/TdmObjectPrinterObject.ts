@@ -1,6 +1,7 @@
 import { TdmTechnologyData } from "../TdmTechnologyData";
-import { TdmObjectPrinterObjectComponent } from "./TdmObjectPrinterObjectComponent";
+import { TdmComponent } from "../TdmComponent";
 
 export class TdmObjectPrinterObject extends TdmTechnologyData {
-    components: TdmObjectPrinterObjectComponent[]
+    materials: TdmComponent[]
+    machines: TdmComponent[]
 }
