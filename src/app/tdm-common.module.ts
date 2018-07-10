@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComponentService } from './services/component.service';
+import { TdmCocktailComponentService } from './services/TdmCocktailComponent.service';
 
 @NgModule({
   imports: [
@@ -10,11 +10,12 @@ import { ComponentService } from './services/component.service';
   exports: [
   ]
 })
+
 export class TdmCommonModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: TdmCommonModule,
-      providers: [ ComponentService ]
+      providers: [ TdmCocktailComponentService ]
     };
   }  
 }

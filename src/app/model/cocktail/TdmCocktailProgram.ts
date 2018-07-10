@@ -1,19 +1,10 @@
-export class CocktailComponent {
-    id: string;
-    name: string;
-    color: string;
+import { TdmCocktailLayer } from "./TdmCocktailLayer";
+import { TdmCocktailComponent } from "./TdmCocktailComponent";
 
-    constructor(id: string, name: string, color: string) {
-        this.id = id;
-        this.name = name;
-        this.color = color;
-    }
-}
-
-export class Cocktail {
+export class TdmCocktailProgram {
     name = "unnamed";
     amount = 240;
-    layers: CocktailLayer[] = [];
+    layers: TdmCocktailLayer[] = [];
 
     getFragmentsCount(): number {
         // total fragments
@@ -25,7 +16,7 @@ export class Cocktail {
     }
 
     public getIngredients() {
-        var ingredients: {[name: string]: number} = {};
+        var ingredients: { [name: string]: number } = {};
         this.layers.forEach(layer => {
             layer.components.forEach(component => {
                 if (ingredients[component.id]) {
@@ -82,7 +73,7 @@ export class Cocktail {
         return program
     }
 
-    public addComponent(component: CocktailComponent, layerIndex: number) {
+    public addComponent(component: TdmCocktailComponent, layerIndex: number) {
         this.layers[layerIndex].components.push(component);
     }
 
@@ -90,7 +81,7 @@ export class Cocktail {
         this.layers[layerIndex].components.splice(componentIndex, 1);
     }
 
-    public addLayer(layer: CocktailLayer, layerIndex: number) {
+    public addLayer(layer: TdmCocktailLayer, layerIndex: number) {
         this.layers.splice(layerIndex, 0, layer);
     }
 
@@ -99,6 +90,3 @@ export class Cocktail {
     }
 }
 
-export class CocktailLayer {
-    components: CocktailComponent[] = [];
-}

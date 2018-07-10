@@ -1,29 +1,29 @@
-import { Injectable, Inject, Optional} from '@angular/core';
-import { CocktailComponent } from '../model/cocktail';
+import { Injectable, Inject, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { TdmCocktailComponent } from '../model/cocktail/TdmCocktailComponent';
 
 @Injectable()
-export class ComponentService {
-  private _availableComponents: BehaviorSubject<CocktailComponent[]> = new BehaviorSubject([])
-  public readonly availableComponents: Observable<CocktailComponent[]> = this._availableComponents.asObservable()
+export class TdmCocktailComponentService {
+  private _availableComponents: BehaviorSubject<TdmCocktailComponent[]> = new BehaviorSubject([])
+  public readonly availableComponents: Observable<TdmCocktailComponent[]> = this._availableComponents.asObservable()
 
-  private _recommendedComponents: BehaviorSubject<CocktailComponent[]> = new BehaviorSubject([])
-  public readonly recommendedComponents: Observable<CocktailComponent[]> = this._recommendedComponents.asObservable()
+  private _recommendedComponents: BehaviorSubject<TdmCocktailComponent[]> = new BehaviorSubject([])
+  public readonly recommendedComponents: Observable<TdmCocktailComponent[]> = this._recommendedComponents.asObservable()
 
-  private _installedComponents: BehaviorSubject<CocktailComponent[]> = new BehaviorSubject([])
-  public readonly installedComponents: Observable<CocktailComponent[]> = this._installedComponents.asObservable()
+  private _installedComponents: BehaviorSubject<TdmCocktailComponent[]> = new BehaviorSubject([])
+  public readonly installedComponents: Observable<TdmCocktailComponent[]> = this._installedComponents.asObservable()
 
   private sourceUrl?: string
   private recommendedComponentIds: string[] = []
   private installedComponentIds: string[] = []
-  
+
   constructor(
     private http: HttpClient,
     @Inject('componentSourceUrl') @Optional() public componentSourceUrl?: string) {
-      this.sourceUrl = componentSourceUrl
-      this.updateComponents()
+    this.sourceUrl = componentSourceUrl
+    this.updateComponents()
   }
 
   setComponentSourceUrl(url: string) {
@@ -31,7 +31,7 @@ export class ComponentService {
     this.updateComponents()
   }
 
-  setComponents(components: CocktailComponent[]) {
+  setComponents(components: TdmCocktailComponent[]) {
     this._availableComponents.next(components)
     this.updateRecommendedComponents()
   }
@@ -48,7 +48,7 @@ export class ComponentService {
 
   updateComponents() {
     if (this.sourceUrl != null) {
-      this.http.get<CocktailComponent[]>(this.sourceUrl).subscribe(components => {
+      this.http.get<TdmCocktailComponent[]>(this.sourceUrl).subscribe(components => {
         if (components["available"] != null) {
           var available = components["available"];
           var installed = components["installed"];

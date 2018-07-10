@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { Component } from '@angular/core';
-import { ComponentService, CocktailComponent } from '../public_api';
+import { TdmCocktailComponentService, TdmCocktailComponent } from '../public_api';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,10 @@ import { ComponentService, CocktailComponent } from '../public_api';
 })
 export class AppComponent {
   title = 'app';
-  availableComponents: CocktailComponent[] = []
-  recommendedComponents: CocktailComponent[] = []
-  installedComponents: CocktailComponent[] = []
-  constructor(componentService: ComponentService) {
+  availableComponents: TdmCocktailComponent[] = []
+  recommendedComponents: TdmCocktailComponent[] = []
+  installedComponents: TdmCocktailComponent[] = []
+  constructor(componentService: TdmCocktailComponentService) {
     componentService.availableComponents.subscribe(components => {
       this.availableComponents = components;
     })
@@ -24,14 +24,14 @@ export class AppComponent {
     })
 
     componentService.setComponents([
-      new CocktailComponent("1", "Apfelsaft", "#7d7"),
-      new CocktailComponent("2", "Bananensaft", "#dd7"),
-      new CocktailComponent("3", "Kirschsaft", "#d77"),
-      new CocktailComponent("4", "Maracujasaft", "#da7"),
-      new CocktailComponent("5", "Ananassaft", "#dc9"),
-      new CocktailComponent("6", "Reserved 1", "#ddf"),
-      new CocktailComponent("7", "Reserved 2", "#ddf"),
-      new CocktailComponent("8", "Reserved 3", "#ddf"),
+      new TdmCocktailComponent("1", "Apfelsaft", "#7d7"),
+      new TdmCocktailComponent("2", "Bananensaft", "#dd7"),
+      new TdmCocktailComponent("3", "Kirschsaft", "#d77"),
+      new TdmCocktailComponent("4", "Maracujasaft", "#da7"),
+      new TdmCocktailComponent("5", "Ananassaft", "#dc9"),
+      new TdmCocktailComponent("6", "Reserved 1", "#ddf"),
+      new TdmCocktailComponent("7", "Reserved 2", "#ddf"),
+      new TdmCocktailComponent("8", "Reserved 3", "#ddf"),
   ])
 
   componentService.setRecommendComponentIds([
