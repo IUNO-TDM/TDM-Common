@@ -1,8 +1,9 @@
 {
   "name": "tdm-common",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "license": "MIT",
+  "main": "index.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -18,7 +19,6 @@
     },
     "dest": "dist/tdm-common"
   },
-  "private": false,
   "dependencies": {
     "@angular/animations": "^5.2.0",
     "@angular/common": "^5.2.0",

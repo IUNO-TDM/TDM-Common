@@ -5,6 +5,6 @@ export class TdmCocktailComponent extends TdmComponent {
         super()
         this.id = id;
         this.name = name;
-        this.color = color;
+        this.displayColor = color;
     }
 }
