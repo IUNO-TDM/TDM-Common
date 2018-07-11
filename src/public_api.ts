@@ -12,4 +12,8 @@ export { TdmTechnology } from './app/model/TdmTechnology'
 export { TdmTechnologyData } from './app/model/TdmTechnologyData'
 export { TdmUser } from './app/model/TdmUser'
 
+export { TdmPaymentOffer } from './app/model/payment/TdmPaymentOffer'
+export { TdmPaymentInvoice } from './app/model/payment/TdmPaymentInvoice'
+export { TdmPaymentTransfer } from './app/model/payment/TdmPaymentTransfer'
+
 export * from './app/tdm-common.module'
