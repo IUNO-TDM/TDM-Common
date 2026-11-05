@@ -6,8 +6,6 @@ export class TdmTechnologyData {
     name: string
     technology: TdmTechnology
     data: any
-    licenseFee: number
-    productCode: number
     description: string
     thumbnail: any
     imageRef: string    
